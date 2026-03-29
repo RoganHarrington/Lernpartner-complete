@@ -1,0 +1,80 @@
+:root {
+  /* Nature Classroom palette */
+  --color-bg: #f5f0e8;
+  --color-bg-card: #fffdf7;
+  --color-text: #2c2c2c;
+  --color-text-muted: #6b6b6b;
+  --color-forest: #3d6b4f;
+  --color-forest-light: #5a8a6a;
+  --color-terracotta: #c2725a;
+  --color-terracotta-light: #d4917d;
+  --color-slate: #4a6274;
+  --color-slate-light: #7a9aad;
+  --color-sand: #d4c5a9;
+  --color-sand-dark: #b5a88e;
+  --color-border: #d4c5a9;
+  --color-shadow: rgba(0, 0, 0, 0.08);
+
+  /* Typography */
+  --font-heading: 'Libre Baskerville', Georgia, serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+
+  /* Borders */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  line-height: 1.3;
+}
+
+a {
+  color: var(--color-forest);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--color-forest-light);
+}
+
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}

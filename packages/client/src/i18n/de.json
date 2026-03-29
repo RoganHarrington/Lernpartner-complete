@@ -1,0 +1,49 @@
+{
+  "app": {
+    "title": "Lernpartner",
+    "subtitle": "Deine Sprachlern-Plattform"
+  },
+  "nav": {
+    "home": "Startseite",
+    "learn": "Lernen",
+    "progress": "Fortschritt",
+    "settings": "Einstellungen",
+    "login": "Anmelden",
+    "register": "Registrieren",
+    "logout": "Abmelden"
+  },
+  "home": {
+    "welcome": "Willkommen bei Lernpartner",
+    "description": "Lerne Sprachen effektiv mit bewährten Methoden wie Karteikarten, Lückentexten und Diktaten.",
+    "startLearning": "Jetzt lernen",
+    "choosePack": "Sprachpaket wählen"
+  },
+  "auth": {
+    "email": "E-Mail-Adresse",
+    "password": "Passwort",
+    "displayName": "Anzeigename",
+    "loginTitle": "Anmelden",
+    "registerTitle": "Registrieren",
+    "loginButton": "Anmelden",
+    "registerButton": "Registrieren",
+    "noAccount": "Noch kein Konto?",
+    "hasAccount": "Bereits ein Konto?"
+  },
+  "learning": {
+    "correct": "Richtig!",
+    "wrong": "Leider falsch",
+    "showAnswer": "Antwort zeigen",
+    "nextCard": "Nächste Karte",
+    "sessionComplete": "Sitzung abgeschlossen!",
+    "cardsReviewed": "Karten wiederholt",
+    "accuracy": "Genauigkeit"
+  },
+  "progress": {
+    "title": "Dein Lernfortschritt",
+    "totalCards": "Karten gesamt",
+    "cardsLearned": "Gelernt",
+    "cardsInProgress": "In Bearbeitung",
+    "cardsNew": "Neu",
+    "streak": "Tage in Folge"
+  }
+}

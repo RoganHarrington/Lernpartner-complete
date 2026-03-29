@@ -1,0 +1,29 @@
+{
+  "name": "lernpartner-complete",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Comprehensive language-learning platform",
+  "workspaces": [
+    "packages/shared",
+    "packages/server",
+    "packages/client"
+  ],
+  "scripts": {
+    "dev": "docker compose up -d postgres minio && concurrently \"npm run dev:server\" \"npm run dev:client\"",
+    "dev:client": "npm run dev -w packages/client",
+    "dev:server": "npm run dev -w packages/server",
+    "build": "npm run build -w packages/shared && concurrently \"npm run build -w packages/server\" \"npm run build -w packages/client\"",
+    "lint": "npm run lint -ws --if-present",
+    "test": "npm run test -ws --if-present",
+    "typecheck": "npm run typecheck -ws --if-present",
+    "db:migrate": "npm run migration:run -w packages/server",
+    "db:seed": "npm run seed -w packages/server"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "typescript": "^5.8.3"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

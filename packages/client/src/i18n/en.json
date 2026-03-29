@@ -1,0 +1,49 @@
+{
+  "app": {
+    "title": "Lernpartner",
+    "subtitle": "Your Language Learning Platform"
+  },
+  "nav": {
+    "home": "Home",
+    "learn": "Learn",
+    "progress": "Progress",
+    "settings": "Settings",
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout"
+  },
+  "home": {
+    "welcome": "Welcome to Lernpartner",
+    "description": "Learn languages effectively with proven methods like flashcards, fill-in-the-gap exercises, and dictation.",
+    "startLearning": "Start learning",
+    "choosePack": "Choose language pack"
+  },
+  "auth": {
+    "email": "Email address",
+    "password": "Password",
+    "displayName": "Display name",
+    "loginTitle": "Login",
+    "registerTitle": "Register",
+    "loginButton": "Login",
+    "registerButton": "Register",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?"
+  },
+  "learning": {
+    "correct": "Correct!",
+    "wrong": "Incorrect",
+    "showAnswer": "Show answer",
+    "nextCard": "Next card",
+    "sessionComplete": "Session complete!",
+    "cardsReviewed": "Cards reviewed",
+    "accuracy": "Accuracy"
+  },
+  "progress": {
+    "title": "Your Learning Progress",
+    "totalCards": "Total cards",
+    "cardsLearned": "Learned",
+    "cardsInProgress": "In progress",
+    "cardsNew": "New",
+    "streak": "Day streak"
+  }
+}
