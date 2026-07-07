@@ -35,7 +35,9 @@ Feedback-Regel fürs Einprägen: Wenn ein Klang zu einem Label vorgespielt wird 
 **Generisch vs. domänenspezifisch** (gilt für alle Themen — Musik, Sprache, Geografie …):
 - Gleich für alle: Sitzungs-Engine, Fortschritt/Leitner (`src/learning/`), Feedback-Fluss, Freischalt-Logik, Session-UI (Fortschrittsbalken, Antwort-Chips, Feedback-Box, Ergebnis).
 - Pro Thema verschieden: Stimulus-Erzeugung, Antwort-Eingabe, Anwendungs-Format und Distraktor-Logik (`src/exercises/<thema>/`).
-- Referenz-Implementierung: Musik-Gehörtraining in `src/exercises/music/` (Intervalle + Akkorde als zwei Konfigurationen desselben Übungstyps).
+- Referenz-Implementierung: Musik-Gehörtraining in `src/exercises/music/` (Intervalle + Akkorde als zwei Konfigurationen desselben Übungstyps); zweite Domäne: Kiswahili in `src/exercises/swahili/` (drei Einheiten: Klang/Betonung, Cognaten mit Herkunfts-Reveal, Ritual-Dialoge mit Sozialregel).
+
+**Sprach-Audio (Kiswahili):** wird einmalig zur Autorenzeit erzeugt mit `node scripts/generate-swahili-audio.mjs` (liest `clips.json`, braucht `OPENROUTER_API_KEY` in der `.env`; Gemini-TTS Stimme „Kore"). Regeln im Skript: immer explizite Sprach-Anweisung; Einzelwörter per Trägersatz + automatischem Zuschnitt (Pausen ≥ 320 ms, Schnitt am Pausen-Anfang wegen leiser Anlaute, Wiederholversuche); Ergebnis liegt versioniert in `packages/client/public/audio/sw/`.
 
 ## Debugging
 

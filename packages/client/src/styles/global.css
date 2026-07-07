@@ -341,6 +341,21 @@ button {
   line-height: 1.25;
 }
 
+/* Kiswahili: großes Wort bei Betonungsfragen, Kontextzeile bei Personen */
+.big-word {
+  font-family: var(--font-display);
+  font-weight: var(--weight-display);
+  font-size: 2.25rem;
+  color: var(--color-primary);
+  line-height: 1.1;
+}
+
+.context-line {
+  color: var(--color-muted);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
 .play-big {
   width: 84px;
   height: 84px;

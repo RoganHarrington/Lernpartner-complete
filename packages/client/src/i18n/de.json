@@ -41,6 +41,75 @@
     "pendingQuality": "{{digit}} gedrückt — noch k (klein) oder g (groß)?",
     "avgTime": "Ø Antwortzeit: {{seconds}} s"
   },
+  "swahili": {
+    "title": "Kiswahili",
+    "sound": {
+      "title": "Klang & Betonung",
+      "desc": "Kiswahili liest man, wie man es schreibt. Tippe die betonte Silbe — und hör die Bestätigung.",
+      "stressPrompt": "Wo liegt die Betonung? Tippe die Silbe.",
+      "spellingPrompt": "Welches Wort hörst du?"
+    },
+    "words": {
+      "title": "Du sprichst schon Kiswahili",
+      "desc": "Safari, Simba, Chai — Wörter, die du längst kennst. Hören und Bedeutung wählen.",
+      "prompt": "Was bedeutet das Wort?",
+      "sentencePrompt": "Ein ganzer Satz — welches bekannte Wort steckt darin?"
+    },
+    "dialog": {
+      "title": "Erste Dialoge",
+      "desc": "Grüßen wie in Ostafrika: fester Ruf, feste Antwort — inklusive Respektsregel.",
+      "respondPrompt": "Du wirst gegrüßt — antworte richtig!",
+      "initiatePrompt": "Wie grüßt du diese Person?"
+    },
+    "stressRule": "Regel: Die Betonung liegt fast immer auf der vorletzten Silbe.",
+    "sentenceWas": "Der Satz war: „{{text}}“",
+    "meanings": {
+      "safari": "Reise",
+      "simba": "Löwe",
+      "rafiki": "Freund / Freundin",
+      "hakuna-matata": "kein Problem",
+      "polisi": "Polizei",
+      "benki": "Bank",
+      "hoteli": "Hotel",
+      "chai": "Tee",
+      "kahawa": "Kaffee",
+      "kompyuta": "Computer",
+      "shule": "Schule",
+      "hela": "Geld",
+      "baiskeli": "Fahrrad",
+      "kiswahili": "die Swahili-Sprache",
+      "kilimanjaro": "der Kilimandscharo"
+    },
+    "origins": {
+      "safari": "arabisch safar („Reise“) — und von Ostafrika aus als Lehnwort in die ganze Welt",
+      "simba": "heißt einfach „Löwe“ — der König der Löwen trägt seinen Gattungsnamen",
+      "rafiki": "„Freund“ — auch der weise Affe im König der Löwen",
+      "hakuna-matata": "wörtlich „es gibt keine Sorgen“ — echtes Kiswahili, nicht nur Filmzitat",
+      "polisi": "englisch police — Lehnwörter bekommen im Kiswahili einen Schlussvokal",
+      "benki": "englisch bank, swahilisiert",
+      "hoteli": "englisch hotel, swahilisiert",
+      "chai": "wie deutsch „Chai“ — über Persisch und Arabisch aus dem Chinesischen",
+      "kahawa": "arabisch qahwa — aus demselben Wort wurde unser „Kaffee“",
+      "kompyuta": "englisch computer, swahilisiert",
+      "shule": "aus dem Deutschen! „Schule“ kam zur Kolonialzeit ins Kiswahili",
+      "hela": "vom deutschen „Heller“ — aus der Kleinmünze wurde das Wort für Geld",
+      "baiskeli": "englisch bicycle, swahilisiert",
+      "kiswahili": "der Name der Sprache — ki- ist die Klassenvorsilbe für Sprachen",
+      "kilimanjaro": "der höchste Berg Afrikas — Betonung wie fast immer: vorletzte Silbe"
+    },
+    "dialogGloss": {
+      "mambo": "Mambo? — Poa! („Was geht?“ — „Alles cool!“): lässig, unter Freunden und Jüngeren",
+      "hujambo": "Hujambo? — Sijambo! („Geht es dir gut?“ — „Mir geht’s gut!“): der neutrale Standardgruß",
+      "habari": "Habari yako? — Nzuri sana! („Was gibt’s Neues bei dir?“ — „Sehr gut!“): Nachfragen gehört dazu",
+      "asante": "Asante sana! — Karibu! („Vielen Dank!“ — „Gern geschehen!“, wörtlich „Willkommen“)",
+      "shikamoo": "Shikamoo! — Marahaba. Der Respektgruß an Ältere; nur die ältere Person antwortet Marahaba."
+    },
+    "personas": {
+      "friend": "Deine gleichaltrige Freundin Neema",
+      "stranger": "Eine unbekannte Person an der Bushaltestelle",
+      "elder": "Mzee Juma, ein älterer Herr"
+    }
+  },
   "music": {
     "title": "Musik",
     "intervals": {

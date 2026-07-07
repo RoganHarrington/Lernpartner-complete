@@ -41,6 +41,75 @@
     "pendingQuality": "{{digit}} pressed — now k (minor) or g (major)?",
     "avgTime": "Avg. response time: {{seconds}} s"
   },
+  "swahili": {
+    "title": "Kiswahili",
+    "sound": {
+      "title": "Sound & Stress",
+      "desc": "Kiswahili is read exactly as written. Tap the stressed syllable — then hear the confirmation.",
+      "stressPrompt": "Where is the stress? Tap the syllable.",
+      "spellingPrompt": "Which word do you hear?"
+    },
+    "words": {
+      "title": "You Already Speak Kiswahili",
+      "desc": "Safari, simba, chai — words you already know. Listen and pick the meaning.",
+      "prompt": "What does the word mean?",
+      "sentencePrompt": "A full sentence — which familiar word is in it?"
+    },
+    "dialog": {
+      "title": "First Dialogues",
+      "desc": "Greet like in East Africa: fixed call, fixed response — respect rule included.",
+      "respondPrompt": "Someone greets you — answer correctly!",
+      "initiatePrompt": "How do you greet this person?"
+    },
+    "stressRule": "Rule: stress almost always falls on the second-to-last syllable.",
+    "sentenceWas": "The sentence was: “{{text}}”",
+    "meanings": {
+      "safari": "journey",
+      "simba": "lion",
+      "rafiki": "friend",
+      "hakuna-matata": "no problem",
+      "polisi": "police",
+      "benki": "bank",
+      "hoteli": "hotel",
+      "chai": "tea",
+      "kahawa": "coffee",
+      "kompyuta": "computer",
+      "shule": "school",
+      "hela": "money",
+      "baiskeli": "bicycle",
+      "kiswahili": "the Swahili language",
+      "kilimanjaro": "Mount Kilimanjaro"
+    },
+    "origins": {
+      "safari": "Arabic safar (“journey”) — and from East Africa a loanword to the world",
+      "simba": "simply means “lion” — The Lion King’s hero bears his species name",
+      "rafiki": "“friend” — also the wise ape in The Lion King",
+      "hakuna-matata": "literally “there are no worries” — real Kiswahili, not just a movie quote",
+      "polisi": "English police — loanwords get a final vowel in Kiswahili",
+      "benki": "English bank, Swahilified",
+      "hoteli": "English hotel, Swahilified",
+      "chai": "like German “Chai” — via Persian and Arabic from Chinese",
+      "kahawa": "Arabic qahwa — the same word became “coffee”",
+      "kompyuta": "English computer, Swahilified",
+      "shule": "from German! “Schule” entered Kiswahili in colonial times",
+      "hela": "from the German “Heller” coin — small change became the word for money",
+      "baiskeli": "English bicycle, Swahilified",
+      "kiswahili": "the language’s own name — ki- is the noun-class prefix for languages",
+      "kilimanjaro": "Africa’s highest mountain — stressed, as almost always, on the second-to-last syllable"
+    },
+    "dialogGloss": {
+      "mambo": "Mambo? — Poa! (“What’s up?” — “Cool!”): casual, among friends",
+      "hujambo": "Hujambo? — Sijambo! (“Are you well?” — “I’m fine!”): the neutral standard greeting",
+      "habari": "Habari yako? — Nzuri sana! (“What’s your news?” — “Very good!”)",
+      "asante": "Asante sana! — Karibu! (“Thank you!” — “You’re welcome!”, literally “welcome”)",
+      "shikamoo": "Shikamoo! — Marahaba. The respect greeting for elders; only the elder replies Marahaba."
+    },
+    "personas": {
+      "friend": "Your friend Neema, same age as you",
+      "stranger": "A stranger at the bus stop",
+      "elder": "Mzee Juma, an elderly gentleman"
+    }
+  },
   "music": {
     "title": "Music",
     "intervals": {
