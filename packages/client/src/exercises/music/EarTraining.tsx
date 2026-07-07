@@ -13,10 +13,13 @@ import {
   activeItemIds,
   hotkeyLabel,
   hotkeyOf,
+  itemIdsForLevel,
   largestLeapIndex,
   MELODIES,
+  type Melody,
   offsetsOf,
   semitonesOf,
+  unlockedTierCount,
   type MusicMode,
 } from './data';
 
@@ -32,6 +35,8 @@ interface Question {
   melodyTitleKey?: string;
   melodyNotes?: number[];
   melodyTarget?: number;
+  /* Rhythmus: Zeitfenster pro Note in Sekunden (aus Notenwerten + BPM). */
+  melodySlots?: number[];
 }
 
 const SESSION_LENGTH = 10;
@@ -46,6 +51,17 @@ function speedPrefKey(mode: MusicMode): string {
   return `lernpartner.pref.speedMode.${areaOf(mode)}`;
 }
 
+function levelPrefKey(mode: MusicMode): string {
+  return `lernpartner.pref.level.${areaOf(mode)}`;
+}
+
+/* Gemerkte Stufen-Wahl, begrenzt auf das Freigeschaltete; Standard: Maximum. */
+function initialLevel(mode: MusicMode): number {
+  const unlocked = unlockedTierCount(mode, loadProgress(areaOf(mode)));
+  const stored = parseInt(localStorage.getItem(levelPrefKey(mode)) ?? '', 10);
+  return Number.isFinite(stored) && stored >= 1 ? Math.min(stored, unlocked) : unlocked;
+}
+
 function randomInt(min: number, max: number): number {
   return min + Math.floor(Math.random() * (max - min + 1));
 }
@@ -54,20 +70,30 @@ function shuffled<T>(arr: T[]): T[] {
   return [...arr].sort(() => Math.random() - 0.5);
 }
 
-function buildQuestions(mode: MusicMode, progress: ProgressMap): Question[] {
-  const active = activeItemIds(mode, progress);
+function buildQuestions(mode: MusicMode, progress: ProgressMap, active: string[]): Question[] {
   // „Natürlich anwenden": die Sitzung endet mit Sprüngen in echten Melodien.
   const appliedCount = mode === 'intervals' ? 2 : 0;
   const main: Question[] = buildSession(active, progress, SESSION_LENGTH - appliedCount).map(
     (id) => ({ itemId: id, root: randomInt(55, 69), applied: false }),
   );
-  const melodies = shuffled(MELODIES.filter((m) => active.includes(m.itemId))).slice(
-    0,
-    appliedCount,
-  );
+  // Melodie-Auswahl: möglichst verschiedene Intervalle in einer Sitzung.
+  const pool = shuffled(MELODIES.filter((m) => active.includes(m.itemId)));
+  const uniqueByItem: Melody[] = [];
+  const duplicates: Melody[] = [];
+  const seenItems = new Set<string>();
+  for (const melody of pool) {
+    if (seenItems.has(melody.itemId)) {
+      duplicates.push(melody);
+    } else {
+      seenItems.add(melody.itemId);
+      uniqueByItem.push(melody);
+    }
+  }
+  const melodies = [...uniqueByItem, ...duplicates].slice(0, appliedCount);
   const applied: Question[] = melodies.map((melody) => {
     // Leichte Transposition: wiedererkennbar, aber nie exakt gleich.
     const shift = randomInt(-2, 2);
+    const beatSeconds = 60 / melody.bpm;
     return {
       itemId: melody.itemId,
       root: 0,
@@ -75,6 +101,7 @@ function buildQuestions(mode: MusicMode, progress: ProgressMap): Question[] {
       melodyTitleKey: melody.titleKey,
       melodyNotes: melody.notes.map((n) => n + shift),
       melodyTarget: largestLeapIndex(melody.notes),
+      melodySlots: melody.durations.map((d) => d * beatSeconds),
     };
   });
   // Falls für die aktiven Items (noch) keine Melodie existiert: generische Anwendungs-Aufgabe.
@@ -99,9 +126,9 @@ function midisFor(question: Question, mode: MusicMode): number[] {
 
 function timingFor(question: Question, mode: MusicMode): PlayOptions {
   if (question.melodyNotes) {
-    // Der gefragte (größte) Sprung wird hörbar betont.
+    // Echter Rhythmus; der gefragte (größte) Sprung wird hörbar betont.
     const target = question.melodyTarget ?? 0;
-    return { noteDur: 0.42, gap: 0.1, accents: [target, target + 1] };
+    return { slots: question.melodySlots, accents: [target, target + 1] };
   }
   if (mode === 'chords') return { noteDur: 0.5, gap: 0.12 };
   if (question.applied) return { noteDur: 0.45, gap: 0.12 };
@@ -128,8 +155,19 @@ function EarTraining({ mode, onExit }: Props) {
   const { t } = useTranslation();
   const area = areaOf(mode);
 
-  const [options, setOptions] = useState(() => activeItemIds(mode, loadProgress(area)));
-  const [questions, setQuestions] = useState(() => buildQuestions(mode, loadProgress(area)));
+  // Frei wählbare Lern-Stufe (auch niedriger als der Freischalt-Stand).
+  const [level, setLevel] = useState(() => initialLevel(mode));
+  const [unlockedLevels, setUnlockedLevels] = useState(() =>
+    unlockedTierCount(mode, loadProgress(area)),
+  );
+  const [options, setOptions] = useState(() => itemIdsForLevel(mode, initialLevel(mode)));
+  const [questions, setQuestions] = useState(() =>
+    buildQuestions(mode, loadProgress(area), itemIdsForLevel(mode, initialLevel(mode))),
+  );
+  // Für die Freischalt-Notiz am Ende: voller Stand vor der Sitzung.
+  const [fullActiveBefore, setFullActiveBefore] = useState(() =>
+    activeItemIds(mode, loadProgress(area)),
+  );
   const [index, setIndex] = useState(0);
   const [played, setPlayed] = useState(false);
   const [answer, setAnswer] = useState<string | null>(null);
@@ -140,7 +178,7 @@ function EarTraining({ mode, onExit }: Props) {
   // Schnellmodus: Tastatur-Antworten, sofortiges Weiterschalten.
   const [speedAvailable, setSpeedAvailable] = useState(() => {
     const progress = loadProgress(area);
-    const mastered = activeItemIds(mode, progress).filter(
+    const mastered = itemIdsForLevel(mode, initialLevel(mode)).filter(
       (id) => getItem(progress, id).box >= 3,
     );
     return mastered.length >= SPEED_UNLOCK_MASTERED;
@@ -162,6 +200,7 @@ function EarTraining({ mode, onExit }: Props) {
     loggedStart.current = true;
     log('lesson.start', {
       mode,
+      level,
       options: options.join(','),
       items: questions.map((q) => q.itemId).join(','),
       speedAvailable,
@@ -278,16 +317,20 @@ function EarTraining({ mode, onExit }: Props) {
     highlightWhile(itemId, 0, duration);
   };
 
-  const restart = () => {
-    log('lesson.restart', { mode });
+  const startSession = (wantedLevel: number) => {
     loggedFinish.current = false;
     clearHighlights();
     const progress = loadProgress(area);
-    const active = activeItemIds(mode, progress);
-    setOptions(active);
-    setQuestions(buildQuestions(mode, progress));
+    const unlocked = unlockedTierCount(mode, progress);
+    const clamped = Math.max(1, Math.min(wantedLevel, unlocked));
+    setUnlockedLevels(unlocked);
+    setLevel(clamped);
+    const items = itemIdsForLevel(mode, clamped);
+    setOptions(items);
+    setFullActiveBefore(activeItemIds(mode, progress));
+    setQuestions(buildQuestions(mode, progress, items));
     setSpeedAvailable(
-      active.filter((id) => getItem(progress, id).box >= 3).length >= SPEED_UNLOCK_MASTERED,
+      items.filter((id) => getItem(progress, id).box >= 3).length >= SPEED_UNLOCK_MASTERED,
     );
     setIndex(0);
     setPlayed(false);
@@ -297,6 +340,18 @@ function EarTraining({ mode, onExit }: Props) {
     setXp(0);
     setFinished(false);
     responseTimes.current = [];
+  };
+
+  const restart = () => {
+    log('lesson.restart', { mode, level });
+    startSession(level);
+  };
+
+  const applyLevel = (wantedLevel: number) => {
+    if (wantedLevel === level) return;
+    localStorage.setItem(levelPrefKey(mode), String(wantedLevel));
+    log('level', { level: wantedLevel });
+    startSession(wantedLevel);
   };
 
   const toggleSpeed = () => {
@@ -359,7 +414,7 @@ function EarTraining({ mode, onExit }: Props) {
 
   if (finished) {
     const newlyUnlocked = activeItemIds(mode, loadProgress(area)).filter(
-      (id) => !options.includes(id),
+      (id) => !fullActiveBefore.includes(id),
     );
     if (!loggedFinish.current) {
       loggedFinish.current = true;
@@ -449,6 +504,23 @@ function EarTraining({ mode, onExit }: Props) {
           style={{ width: `${((index + (answer !== null ? 1 : 0)) / questions.length) * 100}%` }}
         />
       </div>
+
+      {unlockedLevels > 1 && (
+        <div className="level-row" role="group" aria-label={t('session.levelLabel')}>
+          <span className="level-label">{t('session.levelLabel')}</span>
+          {Array.from({ length: unlockedLevels }, (_, i) => i + 1).map((n) => (
+            <button
+              key={n}
+              type="button"
+              className={`level-chip${n === level ? ' on' : ''}`}
+              aria-pressed={n === level}
+              onClick={() => applyLevel(n)}
+            >
+              {n}
+            </button>
+          ))}
+        </div>
+      )}
 
       <div className="stimulus-card">
         {question.applied && <span className="applied-tag">{t('session.application')}</span>}

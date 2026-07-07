@@ -36,6 +36,7 @@
     "score": "{{correct}} von {{total}} richtig",
     "melodyReveal": "Das war „{{song}}“.",
     "speedMode": "Schnellmodus",
+    "levelLabel": "Stufe:",
     "exploreHint": "Tipp: Klick auf eine Antwort (oder ihre Taste), um sie gezielt anzuhören.",
     "pendingQuality": "{{digit}} gedrückt — noch k (klein) oder g (groß)?",
     "avgTime": "Ø Antwortzeit: {{seconds}} s"
@@ -79,7 +80,12 @@
       "saints": "Oh, When the Saints",
       "tannenbaum": "O Tannenbaum",
       "weihnachtsmann": "Morgen kommt der Weihnachtsmann",
-      "bonnie": "My Bonnie Is Over the Ocean"
+      "bonnie": "My Bonnie Is Over the Ocean",
+      "odeFreude": "Ode an die Freude",
+      "haenschen": "Hänschen klein",
+      "schicksal": "Beethovens Fünfte (ta-ta-ta-taa)",
+      "happyBirthday": "Happy Birthday",
+      "zarathustra": "Also sprach Zarathustra (2001)"
     },
     "anchors": {
       "min2": "wie die Haifisch-Musik aus „Der weiße Hai“",

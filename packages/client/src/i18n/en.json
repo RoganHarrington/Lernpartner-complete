@@ -36,6 +36,7 @@
     "score": "{{correct}} of {{total}} correct",
     "melodyReveal": "That was “{{song}}”.",
     "speedMode": "Speed mode",
+    "levelLabel": "Level:",
     "exploreHint": "Tip: click any answer (or press its key) to hear it.",
     "pendingQuality": "{{digit}} pressed — now k (minor) or g (major)?",
     "avgTime": "Avg. response time: {{seconds}} s"
@@ -79,7 +80,12 @@
       "saints": "Oh, When the Saints",
       "tannenbaum": "O Tannenbaum",
       "weihnachtsmann": "Morgen kommt der Weihnachtsmann (Twinkle, Twinkle)",
-      "bonnie": "My Bonnie Is Over the Ocean"
+      "bonnie": "My Bonnie Is Over the Ocean",
+      "odeFreude": "Ode to Joy",
+      "haenschen": "Hänschen klein (German folk song)",
+      "schicksal": "Beethoven's Fifth (ta-ta-ta-taa)",
+      "happyBirthday": "Happy Birthday",
+      "zarathustra": "Also sprach Zarathustra (2001)"
     },
     "anchors": {
       "min2": "like the “Jaws” theme",

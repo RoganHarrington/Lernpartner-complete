@@ -52,23 +52,32 @@ export interface Melody {
   titleKey: string;
   itemId: string;
   notes: number[];
+  /* Notenwerte in Schlägen (Viertel = 1), gleiche Länge wie notes —
+     Wiedererkennen braucht den Rhythmus, nicht nur die Tonfolge. */
+  durations: number[];
+  bpm: number;
 }
 
 /*
- * „Natürlich anwenden": echte Melodien. INVARIANTE: Der größte Sprung der
- * Phrase muss genau das Zielintervall (itemId) sein — gefragt wird nach dem
- * „größten Sprung", nie nach einem vagen „markanten". Nur gemeinfreie
+ * „Natürlich anwenden": echte Melodien MIT Rhythmus. INVARIANTE: Der größte
+ * Sprung der Phrase muss genau das Zielintervall (itemId) sein — gefragt wird
+ * nach dem „größten Sprung", nie nach einem vagen „markanten". Nur gemeinfreie
  * Melodien verwenden (Volkslieder, alte Klassik) — keine urheberrechtlich
  * geschützten Songs!
  */
 export const MELODIES: Melody[] = [
-  { id: 'fuerElise', titleKey: 'music.melodies.fuerElise', itemId: 'min2', notes: [76, 75, 76, 75, 76] },
-  { id: 'entchen', titleKey: 'music.melodies.entchen', itemId: 'maj2', notes: [60, 62, 64, 65, 67, 67] },
-  { id: 'kuckuck', titleKey: 'music.melodies.kuckuck', itemId: 'min3', notes: [67, 64, 67, 64] },
-  { id: 'saints', titleKey: 'music.melodies.saints', itemId: 'maj3', notes: [60, 64, 65, 67] },
-  { id: 'tannenbaum', titleKey: 'music.melodies.tannenbaum', itemId: 'p4', notes: [60, 65, 65, 65, 67, 69] },
-  { id: 'weihnachtsmann', titleKey: 'music.melodies.weihnachtsmann', itemId: 'p5', notes: [60, 60, 67, 67, 69, 69, 67] },
-  { id: 'bonnie', titleKey: 'music.melodies.bonnie', itemId: 'maj6', notes: [60, 69, 67, 65] },
+  { id: 'fuerElise', titleKey: 'music.melodies.fuerElise', itemId: 'min2', notes: [76, 75, 76, 75, 76], durations: [0.5, 0.5, 0.5, 0.5, 0.5], bpm: 120 },
+  { id: 'entchen', titleKey: 'music.melodies.entchen', itemId: 'maj2', notes: [60, 62, 64, 65, 67, 67], durations: [0.5, 0.5, 0.5, 0.5, 1, 1], bpm: 110 },
+  { id: 'kuckuck', titleKey: 'music.melodies.kuckuck', itemId: 'min3', notes: [67, 64, 67, 64], durations: [1, 2, 1, 2], bpm: 100 },
+  { id: 'saints', titleKey: 'music.melodies.saints', itemId: 'maj3', notes: [60, 64, 65, 67], durations: [1, 1, 1, 3], bpm: 110 },
+  { id: 'tannenbaum', titleKey: 'music.melodies.tannenbaum', itemId: 'p4', notes: [60, 65, 65, 65, 67, 69], durations: [0.5, 0.75, 0.25, 1, 0.5, 1.25], bpm: 96 },
+  { id: 'weihnachtsmann', titleKey: 'music.melodies.weihnachtsmann', itemId: 'p5', notes: [60, 60, 67, 67, 69, 69, 67], durations: [1, 1, 1, 1, 1, 1, 2], bpm: 110 },
+  { id: 'bonnie', titleKey: 'music.melodies.bonnie', itemId: 'maj6', notes: [60, 69, 67, 65], durations: [1, 1.5, 0.5, 2], bpm: 104 },
+  { id: 'odeFreude', titleKey: 'music.melodies.odeFreude', itemId: 'maj2', notes: [64, 64, 65, 67, 67, 65, 64, 62], durations: [1, 1, 1, 1, 1, 1, 1, 1], bpm: 120 },
+  { id: 'haenschen', titleKey: 'music.melodies.haenschen', itemId: 'min3', notes: [67, 64, 64, 65, 62, 62], durations: [0.5, 0.5, 1, 0.5, 0.5, 1], bpm: 104 },
+  { id: 'schicksal', titleKey: 'music.melodies.schicksal', itemId: 'maj3', notes: [67, 67, 67, 63], durations: [0.5, 0.5, 0.5, 2.5], bpm: 100 },
+  { id: 'happyBirthday', titleKey: 'music.melodies.happyBirthday', itemId: 'p4', notes: [67, 67, 69, 67, 72, 71], durations: [0.75, 0.25, 1, 1, 1, 2], bpm: 120 },
+  { id: 'zarathustra', titleKey: 'music.melodies.zarathustra', itemId: 'p5', notes: [55, 62, 67], durations: [2, 2, 3], bpm: 100 },
 ];
 
 /* Index, an dem der größte Sprung der Phrase beginnt (bei Gleichstand: der erste). */
@@ -125,19 +134,35 @@ export function hotkeyLabel(mode: MusicMode, itemId: string): string {
   return hotkey.quality ? hotkey.digit + hotkey.quality : hotkey.digit;
 }
 
-export function activeItemIds(mode: MusicMode, progress: ProgressMap): string[] {
+export function tierCount(mode: MusicMode): number {
+  return TIERS[mode].length;
+}
+
+/* Höchste freigeschaltete Stufe (1-basiert): Stufe n+1 öffnet sich, wenn alle
+   Items der Stufen 1..n Box ≥ 2 erreicht haben. */
+export function unlockedTierCount(mode: MusicMode, progress: ProgressMap): number {
   const tiers = TIERS[mode];
-  const active = [...tiers[0]];
+  let count = 1;
   for (let n = 1; n < tiers.length; n++) {
     const previousMastered = tiers
       .slice(0, n)
       .flat()
       .every((id) => getItem(progress, id).box >= 2);
     if (!previousMastered) break;
-    active.push(...tiers[n]);
+    count = n + 1;
   }
+  return count;
+}
+
+/* Items der Stufen 1..level — für frei wählbare (auch niedrigere) Lern-Stufen. */
+export function itemIdsForLevel(mode: MusicMode, level: number): string[] {
+  const items = TIERS[mode].slice(0, level).flat();
   if (mode === 'intervals') {
-    active.sort((a, b) => semitonesOf(a) - semitonesOf(b));
+    items.sort((a, b) => semitonesOf(a) - semitonesOf(b));
   }
-  return active;
+  return items;
+}
+
+export function activeItemIds(mode: MusicMode, progress: ProgressMap): string[] {
+  return itemIdsForLevel(mode, unlockedTierCount(mode, progress));
 }
