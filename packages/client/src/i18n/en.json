@@ -1,7 +1,7 @@
 {
   "app": {
     "title": "Lernpartner",
-    "subtitle": "Your Language Learning Platform"
+    "subtitle": "learn faster – remember longer – apply naturally"
   },
   "nav": {
     "home": "Home",
@@ -14,9 +14,87 @@
   },
   "home": {
     "welcome": "Welcome to Lernpartner",
-    "description": "Learn languages effectively with proven methods like flashcards, fill-in-the-gap exercises, and dictation.",
+    "description": "Learn whatever moves you forward — with proven methods like flashcards, fill-in-the-gap exercises, and dictation.",
     "startLearning": "Start learning",
-    "choosePack": "Choose language pack"
+    "choosePack": "Choose language pack",
+    "sampleLessons": "Sample lessons",
+    "copyLog": "Copy session log",
+    "logCopied": "Log copied — paste it into the chat when reporting issues"
+  },
+  "session": {
+    "question": "Question {{current}} of {{total}}",
+    "listen": "Play",
+    "replay": "Hear again",
+    "next": "Next",
+    "done": "Finish",
+    "back": "Back to overview",
+    "restart": "Practice again",
+    "application": "Apply it",
+    "hearDifference": "Hear the difference",
+    "unlocked": "Newly unlocked:",
+    "correctWas": "the answer is:",
+    "score": "{{correct}} of {{total}} correct",
+    "melodyReveal": "That was “{{song}}”.",
+    "speedMode": "Speed mode",
+    "exploreHint": "Tip: click any answer (or press its key) to hear it.",
+    "pendingQuality": "{{digit}} pressed — now k (minor) or g (major)?",
+    "avgTime": "Avg. response time: {{seconds}} s"
+  },
+  "music": {
+    "title": "Music",
+    "intervals": {
+      "title": "Hearing intervals",
+      "desc": "Two notes in a row — recognize the distance. New intervals unlock once you master the current ones.",
+      "prompt": "Which interval do you hear?",
+      "appliedPrompt": "A short melody — how large is the leap at the end?",
+      "melodyPrompt": "A familiar melody — how large is the biggest leap? (It is played with emphasis.)"
+    },
+    "chords": {
+      "title": "Hearing chords",
+      "desc": "A chord played as an arpeggio — recognize its color: major, minor, and beyond.",
+      "prompt": "Which chord is it?"
+    },
+    "items": {
+      "min2": "Minor second",
+      "maj2": "Major second",
+      "min3": "Minor third",
+      "maj3": "Major third",
+      "p4": "Perfect fourth",
+      "tritone": "Tritone",
+      "p5": "Perfect fifth",
+      "min6": "Minor sixth",
+      "maj6": "Major sixth",
+      "min7": "Minor seventh",
+      "maj7": "Major seventh",
+      "oct": "Octave",
+      "chordMajor": "Major",
+      "chordMinor": "Minor",
+      "chordMaj7": "Maj7",
+      "chordDom7": "Dominant 7th"
+    },
+    "melodies": {
+      "fuerElise": "Für Elise",
+      "entchen": "Alle meine Entchen (German folk song)",
+      "kuckuck": "Kuckuck, Kuckuck (German folk song)",
+      "saints": "Oh, When the Saints",
+      "tannenbaum": "O Tannenbaum",
+      "weihnachtsmann": "Morgen kommt der Weihnachtsmann (Twinkle, Twinkle)",
+      "bonnie": "My Bonnie Is Over the Ocean"
+    },
+    "anchors": {
+      "min2": "like the “Jaws” theme",
+      "maj2": "like the start of “Happy Birthday”",
+      "min3": "like a cuckoo call",
+      "maj3": "like the start of “Oh, When the Saints”",
+      "p4": "like the start of “Amazing Grace”",
+      "tritone": "like the start of “The Simpsons” theme",
+      "p5": "like the start of “Twinkle, Twinkle, Little Star”",
+      "min6": "like the “Love Story” theme",
+      "maj6": "like the start of “My Bonnie Is Over the Ocean”",
+      "min7": "like “Somewhere” from West Side Story",
+      "maj7": "rarely heard on its own — the note pulls toward the octave",
+      "oct": "like the start of “Somewhere Over the Rainbow”"
+    }
   },
   "auth": {
     "email": "Email address",

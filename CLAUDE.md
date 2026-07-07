@@ -12,7 +12,34 @@ For the beginning, the app UI is in **German**. Keep all user-facing strings in 
 
 ## Look & Feel
 
-Botanischer Garten / Nature Classroom: ruhig, naturfarben, konzentriert. Sandfarbener Papierhintergrund, gedeckte Naturfarben (Waldgruen, Terrakotta, Schieferblau). Libre Baskerville (Serif) fuer Ueberschriften, Inter (Sans-Serif) fuer Fliesstext.
+**Motto/Claim** (verbatim, in UI-Texten und Marketing verwenden): „schneller lernen – länger behalten – natürlich anwenden"
+
+**„Schwungfeder"**: leicht, schwungvoll, themenoffen (nicht nur Sprachen). Heller, fast weisser Grund; Hauptfarbe **Koenigsblau** (#2452E0); Signalfarben mit fester Bedeutung: Koralle (#FF6E5F, Schwung/Energie), Minze (#22C39F, richtig/Fortschritt), Honig (#FFB92E, Serie/Belohnung). Ueberschriften: **Baloo 2** ExtraBold (rund); Fliesstext: **Nunito**. Schriften werden lokal gebuendelt (@fontsource), kein Font-CDN.
+
+Signatur-Motiv **„Aufschwung"**: eine ansteigende, sich verjuengende Federstrich-Linie (Unterstreichungen, Lernpfad — der Lernpfad steigt an, jede Station liegt hoeher als die letzte). Knoepfe haben eine fuehlbare dunkle Kante (`box-shadow: 0 4px 0 …`) und federn beim Druecken. Grosse Radien (12/18/24px), weiche Schatten, viel Weissraum. Keine Flaggen oder Sprach-Metaphern im Kern-UI — Themen sind farbige Punkte.
+
+Alle Farben, Schriften, Radien und Schatten kommen ausschliesslich aus den Design-Tokens in `packages/client/src/styles/tokens.css` (semantische Namen wie `--color-primary`, nie direkte Hex-Werte in Komponenten). Palette und Ueberschriften-Schrift sind dort per `data-palette` / `data-headings` am `<html>`-Element austauschbar.
+
+## Didaktik (Motto → Mechanik)
+
+Jede Lerneinheit setzt die drei Motto-Versprechen technisch um:
+
+1. **schneller lernen** — klein anfangen und meistern-basiert freischalten (Tier-System: neue Items erst, wenn die aktuellen Box ≥ 2 erreichen); adaptive Auswahl (schwache Items kommen häufiger); sofortiges kontrastives Feedback (bei Fehlern richtige und gewählte Antwort direkt vergleichbar machen); ab Beherrschung (≥ 3 Items mit Box ≥ 3) **Schnellmodus** zur Automatisierung: Antworten per Tastatur (Intervalle: Ziffer = Stufenzahl des Namens, danach k/g für klein/groß, t für Tritonus; Ziffer allein genügt, solange nur eine Variante freigeschaltet ist), bei richtiger Antwort sofort weiter (~0,5 s), bei falscher kurze Korrektur mit Label-Aufleuchten, dann automatisch weiter; Antwortzeiten werden gemessen (Vorstufe zu `response_time_ms` in `review_history`).
+2. **länger behalten** — Spaced Repetition (Leitner, generisch in `packages/client/src/learning/leitner.ts`); Interleaving statt Themenblöcken; Variabilität der Darbietung (z. B. wechselnde Grundtöne in Musik), damit die Relation gelernt wird statt des Einzelbeispiels; immer aktives Abrufen, nie passives Wiederholen.
+3. **natürlich anwenden** — jede Sitzung endet mit Anwendungs-Aufgaben in echtem Material: bekannte Melodien (WICHTIG: nur gemeinfreie — Volkslieder, alte Klassik — wegen Urheberrecht); Eselsbrücken zu realem Material (Anker-Songs); später Produktion statt nur Erkennung (nachsingen/-spielen → `review_artifacts`).
+
+Regel für Aufgabenstellungen: Kriterien müssen für den Lernenden objektiv nachprüfbar sein — nie nach „dem markanten X" fragen, sondern nach messbarem („der größte Sprung") und das Gemeinte zusätzlich wahrnehmbar machen (Zielsprung wird beim Abspielen betont; Invariante: der größte Sprung der Phrase ist immer das Zielintervall, wird per `largestLeapIndex` abgeleitet statt per Hand gepflegt).
+
+Feedback-Regel fürs Einprägen: Wenn ein Klang zu einem Label vorgespielt wird (kontrastives Feedback, „Unterschied hören"), leuchtet das zugehörige Label synchron zur Wiedergabe auf (audio-visuelle Kopplung). Die Feedback-Phase ist explorierbar: Alle Antwort-Chips sind anklickbar (bzw. per Tastenkürzel auslösbar) und spielen ihr Item im Kontext der Frage — Wiederholen im eigenen Tempo. Jede Exploration pausiert das Auto-Weiterschalten des Schnellmodus; der „Weiter"-Knopf ist in der Feedback-Phase deshalb immer sichtbar.
+
+**Generisch vs. domänenspezifisch** (gilt für alle Themen — Musik, Sprache, Geografie …):
+- Gleich für alle: Sitzungs-Engine, Fortschritt/Leitner (`src/learning/`), Feedback-Fluss, Freischalt-Logik, Session-UI (Fortschrittsbalken, Antwort-Chips, Feedback-Box, Ergebnis).
+- Pro Thema verschieden: Stimulus-Erzeugung, Antwort-Eingabe, Anwendungs-Format und Distraktor-Logik (`src/exercises/<thema>/`).
+- Referenz-Implementierung: Musik-Gehörtraining in `src/exercises/music/` (Intervalle + Akkorde als zwei Konfigurationen desselben Übungstyps).
+
+## Debugging
+
+Die App führt ein lokales Sitzungs-Protokoll (`packages/client/src/services/sessionLog.ts`): Ringpuffer (400 Einträge) in `localStorage['lernpartner.sessionlog']`, überlebt Reload/Absturz. Aufgezeichnet werden View-Wechsel, Lektionsstart, Wiedergaben, Antworten (inkl. Antwortzeit), Auto-Weiter, Schnellmodus-Wechsel sowie globale JS-Fehler. Bei Bug-Reports zuerst das Protokoll ansehen: Knopf „Sitzungs-Protokoll kopieren" auf der Startseite oder Konsole `lernpartnerLog.dump()` / `lernpartnerLog.clear()`. Neue Interaktionen bitte ebenfalls über `log(event, data)` protokollieren.
 
 ## Tech Stack
 

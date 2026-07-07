@@ -1,7 +1,7 @@
 {
   "app": {
     "title": "Lernpartner",
-    "subtitle": "Deine Sprachlern-Plattform"
+    "subtitle": "schneller lernen – länger behalten – natürlich anwenden"
   },
   "nav": {
     "home": "Startseite",
@@ -14,9 +14,87 @@
   },
   "home": {
     "welcome": "Willkommen bei Lernpartner",
-    "description": "Lerne Sprachen effektiv mit bewährten Methoden wie Karteikarten, Lückentexten und Diktaten.",
+    "description": "Lerne, was dich weiterbringt — mit bewährten Methoden wie Karteikarten, Lückentexten und Diktaten.",
     "startLearning": "Jetzt lernen",
-    "choosePack": "Sprachpaket wählen"
+    "choosePack": "Sprachpaket wählen",
+    "sampleLessons": "Beispiel-Lektionen",
+    "copyLog": "Sitzungs-Protokoll kopieren",
+    "logCopied": "Protokoll kopiert — bei Problemen einfach im Chat einfügen"
+  },
+  "session": {
+    "question": "Frage {{current}} von {{total}}",
+    "listen": "Abspielen",
+    "replay": "Nochmal hören",
+    "next": "Weiter",
+    "done": "Fertig",
+    "back": "Zur Übersicht",
+    "restart": "Nochmal üben",
+    "application": "Anwendung",
+    "hearDifference": "Unterschied hören",
+    "unlocked": "Neu freigeschaltet:",
+    "correctWas": "richtig ist:",
+    "score": "{{correct}} von {{total}} richtig",
+    "melodyReveal": "Das war „{{song}}“.",
+    "speedMode": "Schnellmodus",
+    "exploreHint": "Tipp: Klick auf eine Antwort (oder ihre Taste), um sie gezielt anzuhören.",
+    "pendingQuality": "{{digit}} gedrückt — noch k (klein) oder g (groß)?",
+    "avgTime": "Ø Antwortzeit: {{seconds}} s"
+  },
+  "music": {
+    "title": "Musik",
+    "intervals": {
+      "title": "Intervalle hören",
+      "desc": "Zwei Töne nacheinander — erkenne den Abstand. Neue Intervalle schalten sich frei, sobald du die aktuellen beherrschst.",
+      "prompt": "Welches Intervall hörst du?",
+      "appliedPrompt": "Eine kleine Melodie — wie groß ist der Sprung am Ende?",
+      "melodyPrompt": "Eine bekannte Melodie — wie groß ist der größte Sprung? (Er wird betont gespielt.)"
+    },
+    "chords": {
+      "title": "Akkorde hören",
+      "desc": "Ein Akkord als Arpeggio — erkenne seine Farbe: Dur, Moll oder mehr.",
+      "prompt": "Welcher Akkord ist das?"
+    },
+    "items": {
+      "min2": "Kleine Sekunde",
+      "maj2": "Große Sekunde",
+      "min3": "Kleine Terz",
+      "maj3": "Große Terz",
+      "p4": "Quarte",
+      "tritone": "Tritonus",
+      "p5": "Quinte",
+      "min6": "Kleine Sexte",
+      "maj6": "Große Sexte",
+      "min7": "Kleine Septime",
+      "maj7": "Große Septime",
+      "oct": "Oktave",
+      "chordMajor": "Dur",
+      "chordMinor": "Moll",
+      "chordMaj7": "Maj7",
+      "chordDom7": "Dominantsept (7)"
+    },
+    "melodies": {
+      "fuerElise": "Für Elise",
+      "entchen": "Alle meine Entchen",
+      "kuckuck": "Kuckuck, Kuckuck, ruft's aus dem Wald",
+      "saints": "Oh, When the Saints",
+      "tannenbaum": "O Tannenbaum",
+      "weihnachtsmann": "Morgen kommt der Weihnachtsmann",
+      "bonnie": "My Bonnie Is Over the Ocean"
+    },
+    "anchors": {
+      "min2": "wie die Haifisch-Musik aus „Der weiße Hai“",
+      "maj2": "wie der Anfang von „Alle meine Entchen“",
+      "min3": "wie der Kuckucksruf",
+      "maj3": "wie der Anfang von „Oh, When the Saints“",
+      "p4": "wie der Anfang von „O Tannenbaum“",
+      "tritone": "wie der Anfang der „Simpsons“-Titelmelodie",
+      "p5": "wie der Anfang von „Morgen kommt der Weihnachtsmann“",
+      "min6": "wie das „Love Story“-Thema",
+      "maj6": "wie der Anfang von „My Bonnie Is Over the Ocean“",
+      "min7": "wie „Somewhere“ aus der West Side Story",
+      "maj7": "kommt pur selten vor — der Ton zieht hörbar zur Oktave",
+      "oct": "wie der Anfang von „Somewhere Over the Rainbow“"
+    }
   },
   "auth": {
     "email": "E-Mail-Adresse",

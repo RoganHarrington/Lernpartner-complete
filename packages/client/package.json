@@ -11,6 +11,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@fontsource/baloo-2": "^5.2.7",
+    "@fontsource/nunito": "^5.2.7",
     "@lernpartner/shared": "*",
     "i18next": "^25.2.1",
     "react": "^19.1.0",

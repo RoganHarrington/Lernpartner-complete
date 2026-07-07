@@ -1,0 +1,73 @@
+/*
+ * Design-Tokens „Schwungfeder"
+ *
+ * Einzige Quelle für Farben, Schriften, Radien und Schatten.
+ * Komponenten verwenden ausschließlich die semantischen Namen (--color-primary,
+ * --font-display, …), nie direkte Hex-Werte — dadurch bleibt die Palette tauschbar.
+ *
+ * Palette wechseln:   <html data-palette="veilchen">  (Standard: Königsblau)
+ * Überschrift wechseln: <html data-headings="serif">  (Standard: rund/Baloo 2)
+ */
+
+:root {
+  /* Aktive Palette: Königsblau */
+  --color-primary: #2452e0;
+  --color-primary-deep: #1a3fb8; /* Kante unter Knöpfen */
+  --color-primary-tint: #e7edfd; /* helle Flächen, Hover */
+
+  /* Neutrale Töne (palettenübergreifend) */
+  --color-ground: #fbfcff; /* Wolke: Grundfläche */
+  --color-panel: #f1f4fe;
+  --color-card: #ffffff;
+  --color-ink: #2a2953; /* Tinte: Text */
+  --color-muted: #6a6990;
+  --color-line: #e4e7f6;
+
+  /* Signalfarben mit fester Bedeutung */
+  --color-success: #22c39f; /* Minze: richtig, Fortschritt */
+  --color-success-deep: #17a182;
+  --color-energy: #ff6e5f; /* Koralle: Schwung, Energie */
+  --color-energy-deep: #e0503f;
+  --color-reward: #ffb92e; /* Honig: Serie, Belohnung */
+  --color-reward-deep: #e09d14;
+
+  /* Typografie */
+  --font-body: 'Nunito', 'Segoe UI', system-ui, sans-serif;
+  --font-display: 'Baloo 2', 'Arial Rounded MT Bold', var(--font-body);
+  --weight-display: 800;
+
+  /* Fläche & Tiefe */
+  --shadow-card: 0 6px 24px rgba(42, 41, 83, 0.08);
+  --radius-sm: 12px;
+  --radius-md: 18px;
+  --radius-lg: 24px;
+
+  /* Abstände */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+}
+
+/* ---- Alternative Paletten (per data-palette am <html>-Element) ---- */
+
+[data-palette='veilchen'] {
+  --color-primary: #6357e5;
+  --color-primary-deep: #4c41c4;
+  --color-primary-tint: #eceafd;
+}
+
+[data-palette='himmel'] {
+  --color-primary: #1fa9f4;
+  --color-primary-deep: #0e86cc;
+  --color-primary-tint: #e3f3fe;
+}
+
+/* ---- Alternative Überschriften-Schrift (per data-headings am <html>-Element) ---- */
+
+[data-headings='serif'] {
+  --font-display: 'Libre Baskerville', Georgia, serif;
+  --weight-display: 700;
+}
